@@ -2,8 +2,8 @@
   "name": "vuecli_buildingtest",
   "version": "1.0.0",
   "private": true,
-  "description": "A Vue.js project",
-  "author": "河村 泰佑 <kata.kawa813@gmail.com>",
+  "description": "",
+  "author": "kata-n",
   "scripts": {
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
