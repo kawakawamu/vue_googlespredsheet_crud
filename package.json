@@ -10,6 +10,7 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "e2e": "node test/e2e/runner.js",
     "start": "npm run dev",
+    "httpdev": "http-server -c-1",
     "test": "npm run unit && npm run e2e",
     "unit": "jest --config test/unit/jest.conf.js --coverage"
   },
@@ -51,6 +52,7 @@
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
+    "http-server": "^0.11.1",
     "jest": "^22.0.4",
     "jest-serializer-vue": "^0.3.0",
     "nightwatch": "^0.9.12",
