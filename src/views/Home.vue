@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title>
         <v-col cols="8">
-          <v-menu ref="menu" v-model="menu">
+          <v-menu ref="menu" v-model="menu" offset-y>
             <template>
               <v-text-field readonly hide-details />
             </template>
@@ -12,7 +12,13 @@
           </v-menu>
         </v-col>
       </v-card-title>
-      <v-card-tabel class="text-no-wrap" :headers="tableHeaders">
+      <v-card-tabel
+        class="text-no-wrap"
+        :headers="tableHeaders"
+        :serach="search"
+        :footer-props="footerProps"
+        :loading="loading"
+      >
       </v-card-tabel>
     </v-card>
   </div>
