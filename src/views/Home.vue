@@ -3,7 +3,12 @@
     <v-card>
       <v-card-title>
         <v-col cols="8">
-          <v-menu ref="menu" v-model="menu" offset-y>
+          <v-menu
+            ref="menu"
+            v-model="menu"
+            :close-on-content-click="false"
+            offset-y
+          >
             <template>
               <v-text-field readonly hide-details />
             </template>
