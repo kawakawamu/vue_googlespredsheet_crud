@@ -9,6 +9,9 @@
       <v-btn icon to="/settings">
         <v-icon>mdi-cog</v-icon>
       </v-btn>
+      <v-btn icon to="/counter">
+        <v-icon>mdi-cog</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-main>
       <v-container fluid>
@@ -21,8 +24,6 @@
 <script>
 export default {
   name: "App",
-
-  components: {},
 
   data: () => ({
     //
