@@ -75,9 +75,30 @@
           {{ parseInt(item.date.slice(-2)) + "日" }}
         </template>
       </v-data-table>
+      <!-- タグ列 -->
+      <template v-slot:item.tags="{ item }">
+        <div v-if="item.tags">
+          <v-chip
+            class="mr-2"
+            v-for="(tag, i) in item.tags.split(',')"
+            :key="i"
+          >
+            {{ tag }}
+          </v-chip>
+          <!-- 収入列 -->
+          <template>
+            {{ separate(item.income) }}
+          </template>
+          <!-- タグ列 -->
+          <template>
+            {{ separate(item.outgo) }}
+          </template>
+        </div>
+      </template>
     </v-card>
   </div>
 </template>
+
 <script>
 export default {
   name: "Home",
@@ -122,7 +143,6 @@ export default {
       ],
     };
   },
-
   computed: {
     /** テーブルのヘッダー設定 */
     tableHeaders() {
@@ -141,6 +161,17 @@ export default {
     /** テーブルのフッター設定 */
     footerProps() {
       return { itemsPerPageText: "", itemsPerPageOptions: [] };
+    },
+  },
+  methods: {
+    /**
+     * 数字を3桁区切りにして返します。
+     * 受け取った数が null のときは null を返します。
+     */
+    separate(num) {
+      return num !== null
+        ? num.toString().replace(/(\d)(?=(\d{3})+$)/g, "$1,")
+        : null;
     },
   },
 };
