@@ -31,6 +31,20 @@ export default {
       amount: 0,
       /** メモ */
       memo: "",
+      /** 収支カテゴリ一覧 */
+      incomeItems: ["カテ1", "カテ2"],
+      outgoItems: ["カテ3", "カテ4"],
+      /** 選択カテゴリ一覧 */
+      categoryItems: [],
+      /** タグリスト */
+      tagItems: ["タグ1", "タグ2"],
+      /** 編集前の年月（編集時に使う） */
+      beforeYM: "",
+      /** バリデーションルール */
+      titleRules: [
+        (v) => v.trim().length > 0 || "タイトルは必須項目です",
+        (v) => v.length() <= 20 || "20字以内で入力して下さい",
+      ],
     };
   },
 };
