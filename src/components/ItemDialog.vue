@@ -31,11 +31,12 @@ export default {
       amount: 0,
       /** メモ */
       memo: "",
-      /** 収支カテゴリ一覧 */
-      incomeItems: ["カテ1", "カテ2"],
-      outgoItems: ["カテ3", "カテ4"],
+
       /** 選択カテゴリ一覧 */
       categoryItems: [],
+      /** 編集前の年月（編集時に使う） */
+      beforeYM: "",
+
       /** タグリスト */
       tagItems: ["タグ1", "タグ2"],
       /** 編集前の年月（編集時に使う） */
@@ -45,7 +46,34 @@ export default {
         (v) => v.trim().length > 0 || "タイトルは必須項目です",
         (v) => v.length() <= 20 || "20字以内で入力して下さい",
       ],
+      tagRule: (v) => v.length <= 5 || "タグは５種類以内で選択して下さい",
+      amountRules: [
+        (v) => v >= 0 || "金額は0以上で入力して下さい",
+        (v) => Number.isInteger(v) || "整数で入力して下さい",
+      ],
+      memoRule: (v) => v.length <= 50 || "メモは50字以内で入力して下さい",
     };
+  },
+
+  computed: {
+    titleText() {
+      return this.actionType === "add" ? "データ追加" : "データ編集";
+    },
+    actionText() {
+      return this.actionType === "add" ? "追加" : "更新";
+    },
+  },
+
+  methods: {
+    open(actionType, item) {
+      this.show = true;
+      this.actionType = actionType;
+      // this.resetForm(item)
+
+      if (actionType === "edit") {
+        this.beforeYM = item.date.slice(0, 7);
+      }
+    },
   },
 };
 </script>
