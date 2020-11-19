@@ -74,6 +74,9 @@ export default {
         this.beforeYM = item.date.slice(0, 7);
       }
     },
+    onClickClose() {
+      this.show = false;
+    },
   },
 };
 </script>
