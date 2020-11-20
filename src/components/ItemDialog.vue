@@ -77,6 +77,16 @@ export default {
     onClickClose() {
       this.show = false;
     },
+    // 追加
+    onClickAction() {},
+    // 収支が切り替わった時
+    onChangeInout() {
+      if (this.inout === "income") {
+        this.categoryItems = this.incomeItems;
+      } else {
+        this.categoryItems = this.outgoItems;
+      }
+    },
   },
 };
 </script>
