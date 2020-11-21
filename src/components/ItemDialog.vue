@@ -86,6 +86,14 @@ export default {
       } else {
         this.categoryItems = this.outgoItems;
       }
+      this.category = this.categoryItems[0];
+    },
+    // フォームの内容を初期化
+    resetForm(item = {}) {
+      const today = new date();
+      const year = today.getFullYear();
+      const month = ("0" + (today.getMonth() + 1)).slice(-2);
+      const date = ("0" + today.getDate()).slice(-2);
     },
   },
 };
