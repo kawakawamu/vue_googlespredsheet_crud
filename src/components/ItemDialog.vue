@@ -94,6 +94,25 @@ export default {
       const year = today.getFullYear();
       const month = ("0" + (today.getMonth() + 1)).slice(-2);
       const date = ("0" + today.getDate()).slice(-2);
+
+      this.id = item.id || "";
+      this.date = item.date || `${year}-${month}-${date}`;
+      this.title = item.title || "";
+      this.inout = item.income != null ? "income" : "outgo";
+
+      if (this.inout === "income") {
+        this.categoryItems = this.incomeItems;
+        this.amount = item.income || 0;
+      } else {
+        this.categoryItems = this.outgoItems;
+        this.amount = item.outgo || 0;
+      }
+
+      this.category = item.category || this.categoryItems[0];
+      this.tags = item.tags ? item.tags.split(",") : [];
+      this.memo = item.memo || "";
+
+      this.$refs.form.resetValidation();
     },
   },
 };

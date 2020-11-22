@@ -100,8 +100,13 @@
 </template>
 
 <script>
+import ItemDialog from "../components/ItemDialog.vue";
+
 export default {
   name: "Home",
+  components: {
+    ItemDialog,
+  },
 
   data() {
     const today = new Date();
@@ -172,6 +177,9 @@ export default {
       return num !== null
         ? num.toString().replace(/(\d)(?=(\d{3})+$)/g, "$1,")
         : null;
+    },
+    onClickAdd() {
+      this.$refs.ItemDialog.open("add");
     },
   },
 };
