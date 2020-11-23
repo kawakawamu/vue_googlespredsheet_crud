@@ -1,5 +1,6 @@
 <template>
-  <v-dialog> </v-dialog>
+  <v-dialog v-model="show" scrollable persistent max-width="500px" eager>
+  </v-dialog>
 </template>
 <script>
 export default {
