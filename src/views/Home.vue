@@ -181,6 +181,9 @@ export default {
     onClickAdd() {
       this.$refs.ItemDialog.open("add");
     },
+    onClickEdit(item) {
+      this.$refs.ItemDialog.open("edit", item);
+    },
   },
 };
 </script>
