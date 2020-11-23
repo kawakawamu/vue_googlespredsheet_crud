@@ -56,6 +56,11 @@
             hide-details
           />
         </v-col>
+        <v-col class="text-right" cols="4">
+          <v-btn dark color="green" @click="onClickAdd">
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+        </v-col>
       </v-card-title>
       <!-- テーブル -->
       <v-data-table
@@ -95,7 +100,13 @@
           </template>
         </div>
       </template>
+      <!-- 操作列 -->
+      <tempate v-slot:item.actions="{ item }">
+        <v-icon class="mr-2" @click="onClickEdit(item)">mdi-pencil</v-icon>
+        <v-icon>mdi-delete</v-icon>
+      </tempate>
     </v-card>
+    <ItemDialog ref="itemDialog" />
   </div>
 </template>
 
