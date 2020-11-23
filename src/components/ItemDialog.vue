@@ -1,5 +1,9 @@
 <template>
   <v-dialog v-model="show" scrollable persistent max-width="500px" eager>
+    <v-card>
+      <v-card-title>テスト</v-card-title>
+      <v-divider />
+    </v-card>
   </v-dialog>
 </template>
 <script>
@@ -43,8 +47,6 @@ export default {
 
       /** タグリスト */
       tagItems: ["タグ1", "タグ2"],
-      /** 編集前の年月（編集時に使う） */
-      beforeYM: "",
       /** バリデーションルール */
       titleRules: [
         (v) => v.trim().length > 0 || "タイトルは必須項目です",
