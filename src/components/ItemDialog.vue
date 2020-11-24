@@ -3,6 +3,20 @@
     <v-card>
       <v-card-title>テスト</v-card-title>
       <v-divider />
+      <v-card-text>
+        <v-form ref="form" v-model="vailid">
+          <v-menu
+            ref="menu"
+            v-model="menu"
+            :close-on-content-click="false"
+            :return-value.sync="date"
+            transition="scale-transition"
+            offset-y
+            max-width="290px"
+            min-width="290px"
+          ></v-menu>
+        </v-form>
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>
