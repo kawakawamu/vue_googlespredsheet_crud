@@ -24,7 +24,17 @@
                 hide-details
               />
             </template>
-            <v-date-picker v-model="date"> </v-date-picker>
+            <v-date-picker
+              v-model="date"
+              color="blue"
+              locale="ja-jp"
+              :day-format="(date) => new Date(date).getDate()"
+              no-title
+              scrollable
+            >
+              <v-spacer />
+              <v-btn text color="grey" @click="menu = false">取り消す</v-btn>
+            </v-date-picker>
           </v-menu>
         </v-form>
       </v-card-text>
