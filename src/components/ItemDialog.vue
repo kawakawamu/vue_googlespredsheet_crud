@@ -14,7 +14,18 @@
             offset-y
             max-width="290px"
             min-width="290px"
-          ></v-menu>
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                v-model="date"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-on="on"
+                hide-details
+              />
+            </template>
+            <v-date-picker v-model="date"> </v-date-picker>
+          </v-menu>
         </v-form>
       </v-card-text>
     </v-card>
