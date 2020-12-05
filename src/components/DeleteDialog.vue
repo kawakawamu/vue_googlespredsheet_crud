@@ -20,20 +20,27 @@
 </template>
 <script>
 export default {
+  name: "DeleteDialog",
+
   data() {
     return {
       show: false,
       item: {},
     };
   },
+  computed: mapState({
+    loading: (state) => state.loading.delete,
+  }),
   methods: {
+    ...mapActions(["deleteAbData"]),
+    open(item) {
+      this.show = true;
+      this.item = item;
+    },
     /** キャンセルがクリックされたとき */
     onClickClose() {
       this.show = false;
     },
   },
-  computed: mapState({
-    loading: (state) => state.loading.delete,
-  }),
 };
 </script>
