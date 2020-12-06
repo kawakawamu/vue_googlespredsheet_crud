@@ -19,6 +19,8 @@
   </v-dialog>
 </template>
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
   name: "DeleteDialog",
 
@@ -32,7 +34,10 @@ export default {
     loading: (state) => state.loading.delete,
   }),
   methods: {
-    ...mapActions(["deleteAbData"]),
+    ...mapActions([
+      //data
+      "deleteAbData",
+    ]),
     open(item) {
       this.show = true;
       this.item = item;
