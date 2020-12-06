@@ -33,19 +33,20 @@
             >
               <v-spacer />
               <v-btn text color="grey" @click="menu = false">キャンセル</v-btn>
-              <v-btn text color="primary" @click="$refs.menu.save(yearMonth)"
-                >選択</v-btn
-              >
+              <v-btn text color="primary" @click="onSelectMonth">選択</v-btn>
             </v-date-picker>
           </v-menu>
         </v-col>
         <v-spacer />
         <!-- 追加ボタン -->
         <v-col class="text-right" cols="4">
-          <v-btn dark color="green">
+          <v-btn dark color="green" @click="onClickAdd">
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-col>
+
+        <!-- 収支 -->
+
         <!-- 検索フォーム -->
         <v-col cols="12">
           <v-text-field
