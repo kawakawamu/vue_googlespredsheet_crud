@@ -41,6 +41,10 @@ export default {
     onClickClose() {
       this.show = false;
     },
+    async onClickDelete() {
+      await this.deleteAbData({ item: this.item });
+      this.shiw = false;
+    },
   },
 };
 </script>
