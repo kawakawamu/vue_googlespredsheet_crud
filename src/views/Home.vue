@@ -46,6 +46,26 @@
         </v-col>
 
         <!-- 収支 -->
+        <v-col class="overflow-x-auto" cols="12" sm="8">
+          <div class="summary">
+            <div class="mr-4">
+              <table class="text-right">
+                <tr>
+                  <td>収入：</td>
+                  <td>{{ separate(sum.income) }}</td>
+                </tr>
+                <tr>
+                  <td>支出：</td>
+                  <td>{{ separate(sum.outgo) }}</td>
+                </tr>
+                <tr>
+                  <td>収支差：</td>
+                  <td>{{ separate(sum.income - sum.outgo) }}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </v-col>
 
         <!-- 検索フォーム -->
         <v-col cols="12">
@@ -102,10 +122,10 @@
         </div>
       </template>
       <!-- 操作列 -->
-      <tempate v-slot:item.actions="{ item }">
+      <template v-slot:item.actions="{ item }">
         <v-icon class="mr-2" @click="onClickEdit(item)">mdi-pencil</v-icon>
         <v-icon>mdi-delete</v-icon>
-      </tempate>
+      </template>
     </v-card>
     <ItemDialog ref="itemDialog" />
   </div>
@@ -179,6 +199,32 @@ export default {
     footerProps() {
       return { itemsPerPageText: "", itemsPerPageOptions: [] };
     },
+
+    sum() {
+      let income = 0;
+      let outgo = 0;
+      const categoryOutgo = {};
+      const categories = [];
+
+      for (const row of this.tableData) {
+        if (row.income !== null) {
+          income += row.income;
+        } else {
+          outgo += row.outgo;
+          if (categoryOutgo[row.category]) {
+            categoryOutgo[row.category] += row.outgo;
+          } else {
+            categoryOutgo[row.category] = row.outgo;
+          }
+        }
+      }
+
+      return {
+        income,
+        outgo,
+        categories,
+      };
+    },
   },
   methods: {
     /**
@@ -195,6 +241,10 @@ export default {
     },
     onClickEdit(item) {
       this.$refs.ItemDialog.open("edit", item);
+    },
+    onSelectMonth() {
+      this.$refs.menu.save(this.yearMonth);
+      // this.updateTable()
     },
   },
 };

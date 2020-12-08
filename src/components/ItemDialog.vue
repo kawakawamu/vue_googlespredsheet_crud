@@ -4,7 +4,7 @@
       <v-card-title>テスト</v-card-title>
       <v-divider />
       <v-card-text>
-        <v-form ref="form" v-model="vailid">
+        <v-form ref="form" v-model="valid">
           <v-menu
             ref="menu"
             v-model="menu"
