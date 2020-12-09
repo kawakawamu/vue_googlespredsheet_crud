@@ -64,6 +64,7 @@
                 </tr>
               </table>
             </div>
+            <div v-for="category in sum.categories" :key="category[0]"></div>
           </div>
         </v-col>
 
