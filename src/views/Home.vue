@@ -237,6 +237,9 @@ export default {
         ? num.toString().replace(/(\d)(?=(\d{3})+$)/g, "$1,")
         : null;
     },
+    async updateTable() {
+      //await
+    },
     onClickAdd() {
       this.$refs.ItemDialog.open("add");
     },
