@@ -3,13 +3,14 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
-    count: 0,
+const state = {
+  settings: {
+    appName: "家計簿！",
   },
-  mutations: {
-    increment(state) {
-      state.count++;
-    },
-  },
+};
+
+const store = new Vuex.Store({
+  state,
 });
+
+export default store;
