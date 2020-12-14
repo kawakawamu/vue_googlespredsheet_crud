@@ -31,7 +31,22 @@ export default {
 
       appNameRule: (v) => v.length <= 30 || "30文字以内で入力してください",
       stringRule: (v) => v.length <= 150 || "150文字以内で入力してください",
+      categoryRules: [],
+      tagRule: (v) =>
+        itemMaxLength(v) <= 4 || "各タグは四文字以内で入力してください",
     };
+  },
+
+  methods: {
+    onClickSave() {
+      this.$store.dispatch("saveSettings", { settings: this.settings });
+    },
   },
 };
 </script>
+<style>
+.form-wrapper {
+  max-width: 500px;
+  margin: auto;
+}
+</style>
