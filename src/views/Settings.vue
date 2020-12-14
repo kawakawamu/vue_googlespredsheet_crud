@@ -28,6 +28,9 @@ export default {
     return {
       valid: false,
       settings: { ...this.$store.state.settings },
+
+      appNameRule: (v) => v.length <= 30 || "30文字以内で入力してください",
+      stringRule: (v) => v.length <= 150 || "150文字以内で入力してください",
     };
   },
 };
