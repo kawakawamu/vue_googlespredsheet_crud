@@ -18,15 +18,22 @@
         <router-view></router-view>
       </v-container>
     </v-main>
+    <v-snackbar v-model="snackbar" color="error">{{ errorMessage }}</v-snackbar>
   </v-app>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "App",
 
   data: () => ({
     //
+  }),
+
+  computed: mapstate({
+    appName: (state) => state.settings.appName,
   }),
 };
 </script>
