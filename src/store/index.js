@@ -20,11 +20,20 @@ const state = {
     appUrl: "",
     authToken: "",
     strIncomeItems: "",
+    strOutgoItems: "",
+    strTagItems: "",
+  },
+};
+
+const mutations = {
+  setAbData(this, { yearMonth, list }) {
+    state.abData[yearMonth] = list;
   },
 };
 
 const store = new Vuex.Store({
   state,
+  mutations,
 });
 
 export default store;
