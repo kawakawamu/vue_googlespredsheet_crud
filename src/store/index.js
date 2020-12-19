@@ -29,6 +29,20 @@ const mutations = {
   setAbData(this, { yearMonth, list }) {
     state.abData[yearMonth] = list;
   },
+  addAbData(state, { item }) {
+    const yearMonth = item.date.slice(0, 7);
+    const list = state.abData[yearMonth];
+    if (list) {
+      list.push(item);
+    }
+  },
+  deleteAbData(state, { yearMonth, id }) {
+    const list = state.abData[yearMonth];
+    if (list) {
+      const index = list.findIndex((v) => v.id === id);
+      list.splice(index, 1);
+    }
+  },
 };
 
 const store = new Vuex.Store({
