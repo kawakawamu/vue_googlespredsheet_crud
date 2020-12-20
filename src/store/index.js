@@ -43,6 +43,9 @@ const mutations = {
       list.splice(index, 1);
     }
   },
+  setLoading(state, { type, v }) {
+    state.loading[type] = v;
+  },
 };
 
 const store = new Vuex.Store({
