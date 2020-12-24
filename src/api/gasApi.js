@@ -15,3 +15,18 @@ gasApi.interceptors.response.use(
     return Promise.reject(err);
   }
 );
+
+/**
+ * authTokenを設定します
+ * @param {String} token
+ */
+let authToken = "";
+const setAuthToken = (token) => {
+  authToken = token;
+};
+
+/**
+ * 指定年月のデータを取得します
+ * @param {String} yearMonth
+ * @returns {Promise}
+ */
