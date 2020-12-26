@@ -40,3 +40,13 @@ const fetch = (yartMonth) => {
     },
   });
 };
+
+const add = (item) => {
+  return gasApi.post("", {
+    method: "POST",
+    authToken,
+    params: {
+      item,
+    },
+  });
+};
