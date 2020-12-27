@@ -50,3 +50,27 @@ const add = (item) => {
     },
   });
 };
+
+//削除
+const $delete = (yearMonth, id) => {
+  return gasApi.post("", {
+    method: "DELETE",
+    authToken,
+    params: {
+      yearMonth,
+      id,
+    },
+  });
+};
+
+//更新
+const update = (beforeYM, item) => {
+  return gasApi.post("", {
+    method: "PUT",
+    authToken,
+    params: {
+      beforeYM,
+      item,
+    },
+  });
+};
