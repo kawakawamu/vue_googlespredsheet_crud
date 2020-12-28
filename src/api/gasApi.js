@@ -74,3 +74,12 @@ const update = (beforeYM, item) => {
     },
   });
 };
+
+export default {
+  setUrl,
+  setAuthToken,
+  fetch,
+  add,
+  delete: $delete,
+  update,
+};
