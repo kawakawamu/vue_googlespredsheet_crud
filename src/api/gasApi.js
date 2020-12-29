@@ -39,7 +39,7 @@ const setAuthToken = (token) => {
  * @returns {Promise}
  */
 
-const fetch = (yartMonth) => {
+const fetch = (yearMonth) => {
   return gasApi.post("", {
     method: "GET",
     authToken,
