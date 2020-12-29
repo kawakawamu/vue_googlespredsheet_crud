@@ -17,6 +17,14 @@ gasApi.interceptors.response.use(
 );
 
 /**
+ * APIのURLを設定します
+ * @param {String} url
+ */
+const setUrl = (url) => {
+  gasApi.defaults.baseURL = url;
+};
+
+/**
  * authTokenを設定します
  * @param {String} token
  */
