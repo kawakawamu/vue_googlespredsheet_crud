@@ -28,9 +28,11 @@ import { mapState } from "vuex";
 export default {
   name: "App",
 
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+      snackbar: false,
+    };
+  },
 
   computed: mapstate({
     appName: (state) => state.settings.appName,
