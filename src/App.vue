@@ -38,5 +38,11 @@ export default {
     appName: (state) => state.settings.appName,
     errorMessage: (state) => state.errorMessage,
   }),
+
+  watch: {
+    errorMessage() {
+      this.snackbar = true;
+    },
+  },
 };
 </script>
