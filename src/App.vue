@@ -44,5 +44,9 @@ export default {
       this.snackbar = true;
     },
   },
+
+  beforeCreate() {
+    this.$store.dispatch("loadSettings");
+  },
 };
 </script>
