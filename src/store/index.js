@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import gasApi from "../api/gasApi";
 
 Vue.use(Vuex);
 
@@ -26,7 +27,7 @@ const state = {
 };
 
 const mutations = {
-  setAbData(this, { yearMonth, list }) {
+  setAbData(state, { yearMonth, list }) {
     state.abData[yearMonth] = list;
   },
   addAbData(state, { item }) {
@@ -45,6 +46,15 @@ const mutations = {
   },
   setLoading(state, { type, v }) {
     state.loading[type] = v;
+  },
+
+  setErrorMessage(state, { message }) {
+    state.errorMessage = message;
+  },
+
+  saveSettings(state, { message }) {
+    state.settings = { ...settings };
+    const { appName, apiUrl, authToken } = state.settings;
   },
 };
 

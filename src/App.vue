@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app color="blue" dark>
-      <v-toolbar-title>{{ appName }}}</v-toolbar-title>
+      <v-toolbar-title>{{ appName }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon to="/">
         <v-icon>mdi-apple</v-icon>
@@ -34,7 +34,7 @@ export default {
     };
   },
 
-  computed: mapstate({
+  computed: mapState({
     appName: (state) => state.settings.appName,
     errorMessage: (state) => state.errorMessage,
   }),
