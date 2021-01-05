@@ -82,7 +82,10 @@ const mutations = {
 };
 
 const actions = {
-
+  async fetchAbData({ commit }, { yearMonth }) {
+    const type = "fetch";
+    commit("setLoading", {type, v: true})
+  }
 },
 
 const store = new Vuex.Store({
