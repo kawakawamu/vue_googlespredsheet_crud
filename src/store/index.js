@@ -84,7 +84,16 @@ const mutations = {
 const actions = {
   async fetchAbData({ commit }, { yearMonth }) {
     const type = "fetch";
-    commit("setLoading", {type, v: true})
+    commit("setLoading", { type, v: true })
+    try {
+      const res = await gasApi.fetch(yearMonth);
+      commit("setAbData", { yearMonth, list: res.data });
+    } catch (e) {
+      commit("setErrorMessage", { message: e });
+      commit("setAbData", { yearMonth, list: [] });
+    } finally {
+      commit("setLoading", { type, v: false });
+    }
   }
 },
 
