@@ -94,6 +94,9 @@ const actions = {
     } finally {
       commit("setLoading", { type, v: false });
     }
+  },
+  async addAbData() {
+
   }
 },
 
