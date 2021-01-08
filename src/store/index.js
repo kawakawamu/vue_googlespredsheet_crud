@@ -95,8 +95,9 @@ const actions = {
       commit("setLoading", { type, v: false });
     }
   },
-  async addAbData() {
-
+  async addAbData({commit}, {item}) {
+    const type = "add";
+    commit("setLoading", {type, v: true})
   }
 },
 
