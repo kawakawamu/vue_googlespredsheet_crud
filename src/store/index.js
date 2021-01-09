@@ -97,7 +97,12 @@ const actions = {
   },
   async addAbData({commit}, {item}) {
     const type = "add";
-    commit("setLoading", {type, v: true})
+    commit("setLoading", { type, v: true });
+    try {
+      const res = await gasApi.add(item);
+    } catch (e) {
+      commit("setErrorMessage", { message: e });
+    }
   }
 },
 
