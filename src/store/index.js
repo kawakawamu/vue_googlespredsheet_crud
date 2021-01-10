@@ -100,8 +100,11 @@ const actions = {
     commit("setLoading", { type, v: true });
     try {
       const res = await gasApi.add(item);
+      commit("addAbData", { item: res.data });
     } catch (e) {
       commit("setErrorMessage", { message: e });
+    } finally {
+      commit("setLoading", { type, v: false });
     }
   }
 },
