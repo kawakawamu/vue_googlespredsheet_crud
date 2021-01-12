@@ -108,8 +108,8 @@ const actions = {
     }
   },
 
-  async updataAbData() {
-
+  async updataAbData({ commit }, { beforeYM, item }) {
+    const type = "update";
   }
 },
 
