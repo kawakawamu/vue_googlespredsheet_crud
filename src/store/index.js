@@ -110,6 +110,15 @@ const actions = {
 
   async updataAbData({ commit }, { beforeYM, item }) {
     const type = "update";
+    const yearMonth = item.date.slice(0, 7);
+    commit("setLoading", { type, v: true });
+    try {
+      const res = await gasApi.update(beforeYM, item);
+    } catch (e) {
+
+    } finally {
+
+    }
   }
 },
 
