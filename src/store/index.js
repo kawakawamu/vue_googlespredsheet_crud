@@ -114,8 +114,15 @@ const actions = {
     commit("setLoading", { type, v: true });
     try {
       const res = await gasApi.update(beforeYM, item);
+      if (yearMonth === beforeYM) {
+        commit("updateAbData", { yearMonth, item });
+        return;
+      }
+      const id = item.id;
+      commit("deleteAbData", { yearMonth: beforeYM, id });
+      commit("addAbData", { item: res.data });
     } catch (e) {
-
+      commit("setErrorMessage", { message: e });
     } finally {
 
     }
