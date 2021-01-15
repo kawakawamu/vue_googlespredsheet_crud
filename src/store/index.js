@@ -133,6 +133,13 @@ const actions = {
     const yearMonth = item.date.slice(0, 7);
     const id = item.id;
     commit("setLoading", { type, v: true });
+    try {
+
+    } catch (e) {
+
+    } finally {
+
+    }
   }
 },
 
