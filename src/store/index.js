@@ -126,6 +126,13 @@ const actions = {
     } finally {
       commit("setLoading", { type, v: false });
     }
+  },
+
+  async deleteAbData() {
+    const type = "delete";
+    const yearMonth = item.date.slice(0, 7);
+    const id = item.id;
+    commit("setLoading", { type, v: true });
   }
 },
 
