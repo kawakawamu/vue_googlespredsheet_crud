@@ -124,7 +124,7 @@ const actions = {
     } catch (e) {
       commit("setErrorMessage", { message: e });
     } finally {
-
+      commit("setLoading", { type, v: false });
     }
   }
 },
