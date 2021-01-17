@@ -137,9 +137,9 @@ const actions = {
       await gasApi.delete(yearMonth, id);
       commit("delteAbData", { yearMonth, id });
     } catch (e) {
-
+      commit("setErrorMessage", { message: e });
     } finally {
-
+      commit("setLoading", { type, v: false });
     }
   }
 },
