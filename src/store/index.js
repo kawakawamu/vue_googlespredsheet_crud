@@ -95,7 +95,7 @@ const actions = {
       commit("setLoading", { type, v: false });
     }
   },
-  async addAbData({commit}, {item}) {
+  async addAbData({ commit }, { item }) {
     const type = "add";
     commit("setLoading", { type, v: true });
     try {
@@ -141,6 +141,14 @@ const actions = {
     } finally {
       commit("setLoading", { type, v: false });
     }
+  },
+
+  saveSettings( { commit }, { settings }) {
+    commit("saveSettings", { settings });
+  },
+
+  loadSettings({ commit }) {
+    commit("loadSettings");
   }
 },
 
