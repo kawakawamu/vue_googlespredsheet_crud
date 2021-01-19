@@ -152,6 +152,15 @@ const actions = {
   }
 },
 
+const createItems = (v) =>
+  v.split(",")
+    .map((v) => v.trim())
+    .filter((v) => v.length !== 0);
+
+const getters = {
+
+    },
+
 const store = new Vuex.Store({
   state,
   mutations,
