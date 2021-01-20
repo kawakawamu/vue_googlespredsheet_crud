@@ -158,13 +158,19 @@ const createItems = (v) =>
     .filter((v) => v.length !== 0);
 
 const getters = {
-
-    },
+  incomeItems(state) {
+    return createItems(state.settings.strIncomeItems);
+  },
+  outgoItems(state) {
+    return createItems(state.settings.strOutgoItems);
+  }
+},
 
 const store = new Vuex.Store({
   state,
   mutations,
   actions,
+  getters
 });
 
 export default store;
