@@ -163,6 +163,9 @@ const getters = {
   },
   outgoItems(state) {
     return createItems(state.settings.strOutgoItems);
+  },
+  tagItem(state) {
+    return createItems(state.settings.strTagItems);
   }
 },
 
