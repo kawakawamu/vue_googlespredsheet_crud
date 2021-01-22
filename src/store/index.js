@@ -128,7 +128,7 @@ const actions = {
     }
   },
 
-  async deleteAbData() {
+  async deleteAbData({ commit }, { item }) {
     const type = "delete";
     const yearMonth = item.date.slice(0, 7);
     const id = item.id;
