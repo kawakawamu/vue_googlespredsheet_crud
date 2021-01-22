@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import gasApi from "../api/gasApi";
 
 Vue.use(Vuex);
 
@@ -84,7 +85,7 @@ const mutations = {
 const actions = {
   async fetchAbData({ commit }, { yearMonth }) {
     const type = "fetch";
-    commit("setLoading", { type, v: true })
+    commit("setLoading", { type, v: true });
     try {
       const res = await gasApi.fetch(yearMonth);
       commit("setAbData", { yearMonth, list: res.data });
@@ -143,17 +144,18 @@ const actions = {
     }
   },
 
-  saveSettings( { commit }, { settings }) {
+  saveSettings({ commit }, { settings }) {
     commit("saveSettings", { settings });
   },
 
   loadSettings({ commit }) {
     commit("loadSettings");
-  }
-},
+  },
+};
 
 const createItems = (v) =>
-  v.split(",")
+  v
+    .split(",")
     .map((v) => v.trim())
     .filter((v) => v.length !== 0);
 
@@ -166,14 +168,14 @@ const getters = {
   },
   tagItem(state) {
     return createItems(state.settings.strTagItems);
-  }
-},
+  },
+};
 
 const store = new Vuex.Store({
   state,
   mutations,
   actions,
-  getters
+  getters,
 });
 
 export default store;
