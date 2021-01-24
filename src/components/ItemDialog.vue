@@ -36,6 +36,8 @@
               <v-btn text color="grey" @click="menu = false">取り消す</v-btn>
             </v-date-picker>
           </v-menu>
+          <v-text-field label="title" v-model.trim="title" :counter="20">
+          </v-text-field>
         </v-form>
       </v-card-text>
     </v-card>
