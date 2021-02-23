@@ -133,6 +133,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import ItemDialog from "../components/ItemDialog.vue";
 
 export default {
@@ -156,32 +157,14 @@ export default {
       /** 選択年月 */
       yearMonth: `${year}-${month}`,
       /** テーブルに表示させるデータ */
-      tableData: [
-        /** サンプルデータ */
-        {
-          id: "a34109ed",
-          date: "2020-06-01",
-          title: "支出サンプル",
-          category: "買い物",
-          tags: "タグ1",
-          income: null,
-          outgo: 2000,
-          memo: "メモ",
-        },
-        {
-          id: "7c8fa764",
-          date: "2020-06-02",
-          title: "収入サンプル",
-          category: "給料",
-          tags: "タグ1,タグ2",
-          income: 2000,
-          outgo: null,
-          memo: "メモ",
-        },
-      ],
+      tableData: [],
     };
   },
   computed: {
+    ...mapState({
+      abData: (state) => state.abData,
+      loadong: (state) => state.loading.fetch,
+    }),
     /** テーブルのヘッダー設定 */
     tableHeaders() {
       return [
@@ -238,7 +221,15 @@ export default {
         : null;
     },
     async updateTable() {
-      //await
+      const yearMonth = this.yearMonth;
+      const list = this.abData[yearMonth];
+
+      if (list) {
+        this.tableData = list;
+      } else {
+        await this.fetchAbData({ yearMonth });
+        this.tableData = this.abData[yearMonth];
+      }
     },
     onClickAdd() {
       this.$refs.ItemDialog.open("add");

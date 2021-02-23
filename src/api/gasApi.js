@@ -4,6 +4,10 @@ const gasApi = axios.create({
   headers: { "content-type": "application/x-www-form-urlencoded" },
 });
 
+// リクエスト先のURLを変更する
+gasApi.defaults.baseURL =
+  "https://script.google.com/macros/s/AKfycbzFEyBSTh5lLTKayq8SoCENeC7fvUCsuEyzKpVyfi-5_tdehr_4sEOoGA/exec";
+
 gasApi.interceptors.response.use(
   (res) => {
     if (res.data.error) {
