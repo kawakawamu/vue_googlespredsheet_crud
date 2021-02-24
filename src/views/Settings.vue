@@ -8,6 +8,49 @@
         :counter="30"
         :rules="[appNameRule]"
       />
+      <h3>カテゴリ／タグ設定</h3>
+      <p>カンマ（ &#44; ）区切りで入力してください。</p>
+      <!-- 収入カテゴリ -->
+      <v-text-field
+        label="収入カテゴリ"
+        v-model="settings.strIncomeItems"
+        :counter="150"
+        :rules="[stringRule, ...categoryRules]"
+      />
+      <!-- 支出カテゴリ -->
+      <v-text-field
+        label="支出カテゴリ"
+        v-model="settings.strOutgoItems"
+        :counter="150"
+        :rules="[stringRule, ...categoryRules]"
+      />
+      <!-- タグ -->
+      <v-text-field
+        label="タグ"
+        v-model="settings.strTagItems"
+        :counter="150"
+        :rules="[stringRule, tagRule]"
+      />
+      <!-- API URL -->
+      <v-text-field
+        label="API URL"
+        v-model="settings.apiUrl"
+        :counter="150"
+        :rules="[stringRule]"
+      />
+      <!-- Auth Token -->
+      <v-text-field
+        label="Auth Token"
+        v-model="settings.authToken"
+        :counter="150"
+        :rules="[stringRule]"
+      />
+      <v-row class="mt-4">
+        <v-spacer />
+        <v-btn color="primary" :disabled="!valid" @click="onClickSave"
+          >保存</v-btn
+        >
+      </v-row>
     </v-form>
   </div>
 </template>
@@ -44,6 +87,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .form-wrapper {
   max-width: 500px;

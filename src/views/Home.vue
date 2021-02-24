@@ -98,42 +98,42 @@
         mobile-breakpoint="0"
       >
         <!-- 日付列 -->
-        <template v-slot:item.date="{ item }">
+        <template v-slot:[`item.date`]="{ item }">
           {{ parseInt(item.date.slice(-2)) + "日" }}
         </template>
+        <!-- タグ列 -->
+        <template v-slot:[`item.tags`]="{ item }">
+          <div v-if="item.tags">
+            <v-chip
+              class="mr-2"
+              v-for="(tag, i) in item.tags.split(',')"
+              :key="i"
+            >
+              {{ tag }}
+            </v-chip>
+            <!-- 収入列 -->
+            <template>
+              {{ separate(item.income) }}
+            </template>
+            <!-- タグ列 -->
+            <template>
+              {{ separate(item.outgo) }}
+            </template>
+          </div>
+        </template>
+        <!-- 操作列 -->
+        <template v-slot:[`item.actions`]="{ item }">
+          <v-icon class="mr-2" @click="onClickEdit(item)">mdi-pencil</v-icon>
+          <v-icon>mdi-delete</v-icon>
+        </template>
       </v-data-table>
-      <!-- タグ列 -->
-      <template v-slot:item.tags="{ item }">
-        <div v-if="item.tags">
-          <v-chip
-            class="mr-2"
-            v-for="(tag, i) in item.tags.split(',')"
-            :key="i"
-          >
-            {{ tag }}
-          </v-chip>
-          <!-- 収入列 -->
-          <template>
-            {{ separate(item.income) }}
-          </template>
-          <!-- タグ列 -->
-          <template>
-            {{ separate(item.outgo) }}
-          </template>
-        </div>
-      </template>
-      <!-- 操作列 -->
-      <template v-slot:item.actions="{ item }">
-        <v-icon class="mr-2" @click="onClickEdit(item)">mdi-pencil</v-icon>
-        <v-icon>mdi-delete</v-icon>
-      </template>
     </v-card>
     <ItemDialog ref="itemDialog" />
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import ItemDialog from "../components/ItemDialog.vue";
 
 export default {
@@ -148,8 +148,6 @@ export default {
     const month = ("0" + (today.getMonth() + 1)).slice(-2);
 
     return {
-      /** ローディング状態 */
-      loading: false,
       /** 月選択メニューの状態 */
       menu: false,
       /** 検索文字 */
@@ -211,6 +209,11 @@ export default {
     },
   },
   methods: {
+    ...mapActions([
+      // storeデータを取得する
+      "fetchAbData",
+    ]),
+
     /**
      * 数字を3桁区切りにして返します。
      * 受け取った数が null のときは null を返します。
@@ -236,6 +239,9 @@ export default {
     },
     onClickEdit(item) {
       this.$refs.ItemDialog.open("edit", item);
+    },
+    onClickDelete(item) {
+      this.$refs.DeleteDialog.open(item);
     },
     onSelectMonth() {
       this.$refs.menu.save(this.yearMonth);

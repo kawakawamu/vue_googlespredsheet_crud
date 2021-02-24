@@ -37,7 +37,7 @@ const mutations = {
       list.push(item);
     }
   },
-  updateAbData(state, { yearMonth, id }) {
+  updateAbData(state, { yearMonth, item }) {
     const list = state.abData[yearMonth];
     if (list) {
       const index = list.findIndex((v) => v.id === item.id);
@@ -59,7 +59,7 @@ const mutations = {
     state.errorMessage = message;
   },
 
-  saveSettings(state, { message }) {
+  saveSettings(state, { settings }) {
     state.settings = { ...settings };
     const { appName, apiUrl, authToken } = state.settings;
     document.title = appName;
