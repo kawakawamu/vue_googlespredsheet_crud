@@ -18,8 +18,9 @@ const state = {
 
   settings: {
     appName: "家計簿！",
-    appUrl: "",
-    authToken: "",
+    apiUrl:
+      "https://script.google.com/macros/s/AKfycbzFEyBSTh5lLTKayq8SoCENeC7fvUCsuEyzKpVyfi-5_tdehr_4sEOoGA/exec",
+    authToken: "88638c0c-7519-11eb-9439-0242ac130002",
     strIncomeItems: "",
     strOutgoItems: "",
     strTagItems: "",
@@ -72,6 +73,7 @@ const mutations = {
 
   loadSettings(state) {
     const settings = JSON.parse(localStorage.getItem("settings"));
+    console.log(">>>>>settings", state.settings);
     if (settings) {
       state.settings = Object.assign(state.settings, settings);
     }

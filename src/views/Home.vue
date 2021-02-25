@@ -2,72 +2,6 @@
   <div>
     <v-card>
       <v-card-title>
-        <!-- 月選択 -->
-        <v-col cols="8">
-          <v-menu
-            ref="menu"
-            v-model="menu"
-            :close-on-content-click="false"
-            :return-value.sync="yearMonth"
-            transition="scale-transition"
-            offset-y
-            max-width="290px"
-            min-width="290px"
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                v-model="yearMonth"
-                prepend-icon="mdi-calendar"
-                readonly
-                v-on="on"
-                hide-details
-              />
-            </template>
-            <v-date-picker
-              v-model="yearMonth"
-              type="month"
-              color="green"
-              locale="ja-jp"
-              no-title
-              scrollable
-            >
-              <v-spacer />
-              <v-btn text color="grey" @click="menu = false">キャンセル</v-btn>
-              <v-btn text color="primary" @click="onSelectMonth">選択</v-btn>
-            </v-date-picker>
-          </v-menu>
-        </v-col>
-        <v-spacer />
-        <!-- 追加ボタン -->
-        <v-col class="text-right" cols="4">
-          <v-btn dark color="green" @click="onClickAdd">
-            <v-icon>mdi-plus</v-icon>
-          </v-btn>
-        </v-col>
-
-        <!-- 収支 -->
-        <v-col class="overflow-x-auto" cols="12" sm="8">
-          <div class="summary">
-            <div class="mr-4">
-              <table class="text-right">
-                <tr>
-                  <td>収入：</td>
-                  <td>{{ separate(sum.income) }}</td>
-                </tr>
-                <tr>
-                  <td>支出：</td>
-                  <td>{{ separate(sum.outgo) }}</td>
-                </tr>
-                <tr>
-                  <td>収支差：</td>
-                  <td>{{ separate(sum.income - sum.outgo) }}</td>
-                </tr>
-              </table>
-            </div>
-            <div v-for="category in sum.categories" :key="category[0]"></div>
-          </div>
-        </v-col>
-
         <!-- 検索フォーム -->
         <v-col cols="12">
           <v-text-field
@@ -111,20 +45,20 @@
             >
               {{ tag }}
             </v-chip>
-            <!-- 収入列 -->
-            <template>
-              {{ separate(item.income) }}
-            </template>
-            <!-- タグ列 -->
-            <template>
-              {{ separate(item.outgo) }}
-            </template>
           </div>
         </template>
+        <!-- 収入列 -->
+        <template [`item.income`]="{ item }">
+          {{ separate(item.income) }}
+        </template>
+        <!-- タグ列 -->
+        <template [`item.outgo`]="{ item }">
+          {{ separate(item.outgo) }}
+        </template>
         <!-- 操作列 -->
-        <template v-slot:[`item.actions`]="{ item }">
+        <template [`item.actions`]="{ item }">
           <v-icon class="mr-2" @click="onClickEdit(item)">mdi-pencil</v-icon>
-          <v-icon>mdi-delete</v-icon>
+          <v-icon @click="onClickDelete(item)">mdi-delete</v-icon>
         </template>
       </v-data-table>
     </v-card>
@@ -181,32 +115,6 @@ export default {
     footerProps() {
       return { itemsPerPageText: "", itemsPerPageOptions: [] };
     },
-
-    sum() {
-      let income = 0;
-      let outgo = 0;
-      const categoryOutgo = {};
-      const categories = [];
-
-      for (const row of this.tableData) {
-        if (row.income !== null) {
-          income += row.income;
-        } else {
-          outgo += row.outgo;
-          if (categoryOutgo[row.category]) {
-            categoryOutgo[row.category] += row.outgo;
-          } else {
-            categoryOutgo[row.category] = row.outgo;
-          }
-        }
-      }
-
-      return {
-        income,
-        outgo,
-        categories,
-      };
-    },
   },
   methods: {
     ...mapActions([
@@ -247,6 +155,10 @@ export default {
       this.$refs.menu.save(this.yearMonth);
       // this.updateTable()
     },
+  },
+
+  created() {
+    this.updateTable;
   },
 };
 </script>

@@ -47,7 +47,10 @@
     </v-card>
   </v-dialog>
 </template>
+
 <script>
+import { mapActions, mapGetters, mapState } from "vuex";
+
 export default {
   name: "ItemDialog",
 
@@ -112,6 +115,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(["addAbData", "updateAbData"]),
     open(actionType, item) {
       this.show = true;
       this.actionType = actionType;
