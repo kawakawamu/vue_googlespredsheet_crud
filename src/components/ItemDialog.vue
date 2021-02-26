@@ -106,6 +106,11 @@ export default {
   },
 
   computed: {
+    ...mapGetters(["incomeItems", "outgoItems", "tagItems"]),
+
+    ...mapState({
+      loading: (state) => state.loading.add || state.loading.update,
+    }),
     titleText() {
       return this.actionType === "add" ? "データ追加" : "データ編集";
     },
