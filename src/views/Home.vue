@@ -15,66 +15,21 @@
         <v-col class="text-right" cols="4">
           <v-btn dark color="green" @click="onClickAdd">
             <v-icon>mdi-plus</v-icon>
+            {{ loading }}
           </v-btn>
         </v-col>
       </v-card-title>
-      <!-- テーブル -->
-      <v-data-table
-        class="text-no-wrap"
-        :headers="tableHeaders"
-        :items="tableData"
-        :search="search"
-        :footer-props="footerProps"
-        :loading="loading"
-        :sort-by="'date'"
-        :sort-desc="true"
-        :items-per-page="30"
-        mobile-breakpoint="0"
-      >
-        <!-- 日付列 -->
-        <template v-slot:[`item.date`]="{ item }">
-          {{ parseInt(item.date.slice(-2)) + "日" }}
-        </template>
-        <!-- タグ列 -->
-        <template v-slot:[`item.tags`]="{ item }">
-          <div v-if="item.tags">
-            <v-chip
-              class="mr-2"
-              v-for="(tag, i) in item.tags.split(',')"
-              :key="i"
-            >
-              {{ tag }}
-            </v-chip>
-          </div>
-        </template>
-        <!-- 収入列 -->
-        <template [`item.income`]="{ item }">
-          {{ separate(item.income) }}
-        </template>
-        <!-- タグ列 -->
-        <template [`item.outgo`]="{ item }">
-          {{ separate(item.outgo) }}
-        </template>
-        <!-- 操作列 -->
-        <template [`item.actions`]="{ item }">
-          <v-icon class="mr-2" @click="onClickEdit(item)">mdi-pencil</v-icon>
-          <v-icon @click="onClickDelete(item)">mdi-delete</v-icon>
-        </template>
-      </v-data-table>
     </v-card>
-    <ItemDialog ref="itemDialog" />
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
-import ItemDialog from "../components/ItemDialog.vue";
 
 export default {
   name: "Home",
-  components: {
-    ItemDialog,
-  },
+
+  components: {},
 
   data() {
     const today = new Date();
@@ -94,8 +49,10 @@ export default {
   },
   computed: {
     ...mapState({
+      /** 家計簿データ */
       abData: (state) => state.abData,
-      loadong: (state) => state.loading.fetch,
+      /** ローディング状態 */
+      loading: (state) => state.loading.fetch,
     }),
     /** テーブルのヘッダー設定 */
     tableHeaders() {
@@ -122,6 +79,17 @@ export default {
       "fetchAbData",
     ]),
 
+    async updateTable() {
+      const yearMonth = this.yearMonth;
+      const list = this.abData[yearMonth];
+      console.log("....list");
+      if (list) {
+        this.tableData = list;
+      } else {
+        await this.fetchAbData({ yearMonth });
+        this.tableData = this.abData[yearMonth];
+      }
+    },
     /**
      * 数字を3桁区切りにして返します。
      * 受け取った数が null のときは null を返します。
@@ -130,17 +98,6 @@ export default {
       return num !== null
         ? num.toString().replace(/(\d)(?=(\d{3})+$)/g, "$1,")
         : null;
-    },
-    async updateTable() {
-      const yearMonth = this.yearMonth;
-      const list = this.abData[yearMonth];
-
-      if (list) {
-        this.tableData = list;
-      } else {
-        await this.fetchAbData({ yearMonth });
-        this.tableData = this.abData[yearMonth];
-      }
     },
     onClickAdd() {
       this.$refs.ItemDialog.open("add");

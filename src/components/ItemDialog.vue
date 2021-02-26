@@ -1,10 +1,12 @@
 <template>
+  <!-- 追加／編集ダイアログ -->
   <v-dialog v-model="show" scrollable persistent max-width="500px" eager>
     <v-card>
-      <v-card-title>テスト</v-card-title>
+      <v-card-title>{{ titleText }}</v-card-title>
       <v-divider />
       <v-card-text>
         <v-form ref="form" v-model="valid">
+          <!-- 日付選択 -->
           <v-menu
             ref="menu"
             v-model="menu"
@@ -26,24 +28,90 @@
             </template>
             <v-date-picker
               v-model="date"
-              color="blue"
+              color="green"
               locale="ja-jp"
               :day-format="(date) => new Date(date).getDate()"
               no-title
               scrollable
             >
               <v-spacer />
-              <v-btn text color="grey" @click="menu = false">取り消す</v-btn>
+              <v-btn text color="grey" @click="menu = false">キャンセル</v-btn>
+              <v-btn text color="primary" @click="$refs.menu.save(date)"
+                >選択</v-btn
+              >
             </v-date-picker>
           </v-menu>
+          <!-- タイトル -->
           <v-text-field
-            label="title"
+            label="タイトル"
             v-model.trim="title"
             :counter="20"
             :rules="titleRules"
           />
+          <!-- 収支 -->
+          <v-radio-group
+            row
+            v-model="inout"
+            hide-details
+            @change="onChangeInout"
+          >
+            <v-radio label="収入" value="income" />
+            <v-radio label="支出" value="outgo" />
+          </v-radio-group>
+          <!-- カテゴリ -->
+          <v-select
+            label="カテゴリ"
+            v-model="category"
+            :items="categoryItems"
+            hide-details
+          />
+          <!-- タグ -->
+          <v-select
+            label="タグ"
+            v-model="tags"
+            :items="tagItems"
+            multiple
+            chips
+            :rules="[tagRule]"
+          />
+          <!-- 金額 -->
+          <v-text-field
+            label="金額"
+            v-model.number="amount"
+            prefix="￥"
+            pattern="[0-9]*"
+            :rules="amountRules"
+          />
+          <!-- メモ -->
+          <v-text-field
+            label="メモ"
+            v-model="memo"
+            :counter="50"
+            :rules="[memoRule]"
+          />
         </v-form>
       </v-card-text>
+      <v-divider />
+      <v-card-actions>
+        <v-spacer />
+        <v-btn
+          color="grey darken-1"
+          text
+          :disabled="loading"
+          @click="onClickClose"
+        >
+          キャンセル
+        </v-btn>
+        <v-btn
+          color="blue darken-1"
+          text
+          :disabled="!valid"
+          :loading="loading"
+          @click="onClickAction"
+        >
+          {{ actionText }}
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
@@ -111,6 +179,7 @@ export default {
     ...mapState({
       loading: (state) => state.loading.add || state.loading.update,
     }),
+
     titleText() {
       return this.actionType === "add" ? "データ追加" : "データ編集";
     },

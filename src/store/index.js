@@ -73,7 +73,6 @@ const mutations = {
 
   loadSettings(state) {
     const settings = JSON.parse(localStorage.getItem("settings"));
-    console.log(">>>>>settings", state.settings);
     if (settings) {
       state.settings = Object.assign(state.settings, settings);
     }
