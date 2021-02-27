@@ -68,8 +68,7 @@
           <!-- タグ -->
           <v-select
             label="タグ"
-            v-model="tags"
-            :items="tagItems"
+            :items="tags"
             multiple
             chips
             :rules="[tagRule]"
@@ -187,10 +186,12 @@ export default {
 
   methods: {
     ...mapActions(["addAbData", "updateAbData"]),
+
     open(actionType, item) {
       this.show = true;
       this.actionType = actionType;
-      // this.resetForm(item)
+
+      this.resetForm(item);
 
       if (actionType === "edit") {
         this.beforeYM = item.date.slice(0, 7);
@@ -212,25 +213,27 @@ export default {
     },
     // フォームの内容を初期化
     resetForm(item = {}) {
-      const today = new date();
-      const year = today.getFullYear();
-      const month = ("0" + (today.getMonth() + 1)).slice(-2);
-      const date = ("0" + today.getDate()).slice(-2);
+      // const today = new date();
+      // const year = today.getFullYear();
+      // const month = ("0" + (today.getMonth() + 1)).slice(-2);
+      // const date = ("0" + today.getDate()).slice(-2);
 
       this.id = item.id || "";
-      this.date = item.date || `${year}-${month}-${date}`;
+      this.date = item.date;
+      // this.date = item.date || `${year}-${month}-${date}`;
       this.title = item.title || "";
-      this.inout = item.income != null ? "income" : "outgo";
+      this.inout = item.income != "" ? "income" : "outgo";
+      this.category = item.category;
 
-      if (this.inout === "income") {
-        this.categoryItems = this.incomeItems;
-        this.amount = item.income || 0;
-      } else {
-        this.categoryItems = this.outgoItems;
-        this.amount = item.outgo || 0;
-      }
+      // if (this.inout === "income") {
+      //   this.categoryItems = this.incomeItems;
+      //   this.amount = item.income || 0;
+      // } else {
+      //   this.categoryItems = this.outgoItems;
+      //   this.amount = item.outgo || 0;
+      // }
 
-      this.category = item.category || this.categoryItems[0];
+      // this.category = item.category || this.categoryItems[0];
       this.tags = item.tags ? item.tags.split(",") : [];
       this.memo = item.memo || "";
 

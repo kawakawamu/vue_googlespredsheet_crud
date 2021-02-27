@@ -29,6 +29,7 @@
               locale="ja-jp"
               no-title
               scrollable
+              class="date__picker"
             >
             </v-date-picker>
             <v-spacer />
@@ -78,7 +79,65 @@
             </div>
           </div>
         </v-col>
+
+        <!-- 検索 -->
+        <v-col cols="12" sm="4">
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          />
+        </v-col>
       </v-card-title>
+
+      <!-- テーブル -->
+      <v-data-table
+        class="text-no-wrap"
+        :headers="tableHeaders"
+        :items="tableData"
+        :search="search"
+        :footer-proprs="footerProps"
+        :loading="loading"
+        :sort-by="'date'"
+        :sort-desc="true"
+        :items-per-page="30"
+        mobile-breakpoint="0"
+      >
+        <!-- 日付列 v-slotはこの書き方で！-->
+        <template v-slot:[`item.date`]="{ item }">
+          {{ parseInt(item.date.slice(-2)) + "日" }}
+        </template>
+
+        <!-- タグ列 -->
+        <template v-slot:[`item.tags`]="{ item }">
+          <div v-if="item.tags">
+            <v-chip
+              class="mr-2"
+              v-for="(tag, i) in item.tags.split(',')"
+              :key="i"
+            >
+              {{ tag }}
+            </v-chip>
+          </div>
+        </template>
+
+        <!-- 収入列 -->
+        <template v-slot:[`item.income`]="{ item }">
+          {{ separate(item.income) }}
+        </template>
+
+        <!-- outgo -->
+        <template v-slot:[`item.outgo`]="{ item }">
+          {{ separate(item.outgo) }}
+        </template>
+
+        <template v-slot:[`item.actions`]="{ item }">
+          <v-icon class="mr-2" @click="onClickEdit(item)">mdi-pencil</v-icon>
+          <v-icon @click="onClickDelete(item)">mdi-delete</v-icon>
+        </template>
+      </v-data-table>
     </v-card>
     <ItemDialog ref="itemDialog" />
     <DeleteDialog ref="deleteDialog" />
@@ -147,15 +206,15 @@ export default {
       const categories = [];
 
       // 収支の合計とカテゴリ別の支出を計算
-      for (const row of this.tableData) {
-        if (row.income !== null) {
-          income += row.income;
+      for (const data of this.tableData) {
+        if (data.income === 0) {
+          income += data.income;
         } else {
-          outgo += row.outgo;
-          if (categoryOutgo[row.category]) {
-            categoryOutgo[row.category] += row.outgo;
+          outgo += data.outgo;
+          if (categoryOutgo[data.category]) {
+            categoryOutgo[data.category] += data.outgo;
           } else {
-            categoryOutgo[row.category] = row.outgo;
+            categoryOutgo[data.category] = data.outgo;
           }
         }
       }
@@ -183,6 +242,7 @@ export default {
     async updateTable() {
       const yearMonth = this.yearMonth;
       const list = this.abData[yearMonth];
+
       if (list) {
         this.tableData = list;
       } else {
@@ -219,3 +279,4 @@ export default {
   },
 };
 </script>
+<style></style>
