@@ -130,8 +130,6 @@ export default {
       valid: false,
       /** 日付選択メニューの表示状態 */
       menu: false,
-      /** ローディング状態 */
-      loading: false,
 
       /** 操作タイプ 'add' or 'edit' */
       actionType: "add",
@@ -157,12 +155,10 @@ export default {
       /** 編集前の年月（編集時に使う） */
       beforeYM: "",
 
-      /** タグリスト */
-      tagItems: ["タグ1", "タグ2"],
       /** バリデーションルール */
       titleRules: [
         (v) => v.trim().length > 0 || "タイトルは必須項目です",
-        (v) => v.length() <= 20 || "20字以内で入力して下さい",
+        (v) => v.length <= 20 || "20字以内で入力して下さい",
       ],
       tagRule: (v) => v.length <= 5 || "タグは５種類以内で選択して下さい",
       amountRules: [
@@ -177,7 +173,8 @@ export default {
     ...mapGetters(["incomeItems", "outgoItems", "tagItems"]),
 
     ...mapState({
-      loading: (state) => state.loading.add || state.loading.update,
+      /** ローディング状態 */
+      loading: (state) => state.loading.fetch,
     }),
 
     titleText() {
