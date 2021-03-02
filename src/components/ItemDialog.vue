@@ -129,7 +129,6 @@ export default {
       valid: false,
       /** 日付選択メニューの表示状態 */
       menu: false,
-
       /** 操作タイプ 'add' or 'edit' */
       actionType: "add",
       /** id */
