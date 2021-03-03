@@ -224,13 +224,13 @@ export default {
       this.inout = item.income != "" ? "income" : "outgo";
       this.category = item.category;
 
-      // if (this.inout === "income") {
-      //   this.categoryItems = this.incomeItems;
-      //   this.amount = item.income || 0;
-      // } else {
-      //   this.categoryItems = this.outgoItems;
-      //   this.amount = item.outgo || 0;
-      // }
+      if (this.inout === "income") {
+        this.categoryItems = this.incomeItems;
+        this.amount = item.income || 0;
+      } else {
+        this.categoryItems = this.outgoItems;
+        this.amount = item.outgo || 0;
+      }
 
       // this.category = item.category || this.categoryItems[0];
       this.tags = item.tags ? item.tags.split(",") : [];
