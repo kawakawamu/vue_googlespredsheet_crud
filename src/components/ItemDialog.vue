@@ -200,7 +200,12 @@ export default {
       this.show = false;
     },
     // 追加
-    onClickAction() {},
+    onClickAction() {
+      const item = {
+        date: this.date,
+        title: this.title,
+      };
+    },
     // 収支が切り替わった時
     onChangeInout() {
       if (this.inout === "income") {
