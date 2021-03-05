@@ -204,6 +204,11 @@ export default {
       const item = {
         date: this.date,
         title: this.title,
+        category: this.category,
+        tags: this.tags.join(","),
+        memo: this.memo,
+        income: null,
+        outgo: null,
       };
     },
     // 収支が切り替わった時
