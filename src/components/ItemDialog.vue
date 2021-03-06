@@ -210,6 +210,12 @@ export default {
         income: null,
         outgo: null,
       };
+      item[this.inout] = this.amount || 0;
+
+      if (this.actionType === "add") {
+      } else {
+        (item = this), id;
+      }
     },
     // 収支が切り替わった時
     onChangeInout() {
