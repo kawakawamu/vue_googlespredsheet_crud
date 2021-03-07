@@ -200,7 +200,7 @@ export default {
       this.show = false;
     },
     // 追加
-    onClickAction() {
+    async onClickAction() {
       const item = {
         date: this.date,
         title: this.title,
@@ -213,8 +213,12 @@ export default {
       item[this.inout] = this.amount || 0;
 
       if (this.actionType === "add") {
+        //追加
+        await this.addAbData({ item });
       } else {
-        (item = this), id;
+        //更新
+        item.id = this.id;
+        await this.updateAbData({ beforeYM: this.beforeYM, item });
       }
     },
     // 収支が切り替わった時
