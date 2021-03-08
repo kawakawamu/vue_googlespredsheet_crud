@@ -110,9 +110,8 @@ const actions = {
     }
   },
 
-  async updataAbData({ commit }, { beforeYM, item }) {
+  async updateAbData({ commit }, { beforeYM, item }) {
     const type = "update";
-    console.log("actionしている");
     const yearMonth = item.date.slice(0, 7);
     commit("setLoading", { type, v: true });
     try {
@@ -125,7 +124,10 @@ const actions = {
       commit("deleteAbData", { yearMonth: beforeYM, id });
       commit("addAbData", { item: res.data });
     } catch (e) {
-      commit("setErrorMessage", { message: e });
+      commit("setErrorMessage", {
+        message:
+          "エラーが発生しました。しばらく待ってからもう一度やり直してください",
+      });
     } finally {
       commit("setLoading", { type, v: false });
     }
