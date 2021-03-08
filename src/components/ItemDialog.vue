@@ -220,6 +220,8 @@ export default {
         item.id = this.id;
         await this.updateAbData({ beforeYM: this.beforeYM, item });
       }
+
+      this.show = false;
     },
     // 収支が切り替わった時
     onChangeInout() {
