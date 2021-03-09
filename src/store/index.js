@@ -142,7 +142,9 @@ const actions = {
       await gasApi.delete(yearMonth, id);
       commit("delteAbData", { yearMonth, id });
     } catch (e) {
-      commit("setErrorMessage", { message: e });
+      commit("setErrorMessage", {
+        message: "エラーが発生しました。しばらく待ってからもう一度やり直してく",
+      });
     } finally {
       commit("setLoading", { type, v: false });
     }
