@@ -109,7 +109,6 @@ const actions = {
       commit("setLoading", { type, v: false });
     }
   },
-
   async updateAbData({ commit }, { beforeYM, item }) {
     const type = "update";
     const yearMonth = item.date.slice(0, 7);

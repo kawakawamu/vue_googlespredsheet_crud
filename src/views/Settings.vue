@@ -1,6 +1,6 @@
 <template>
   <div class="form-wrapper">
-    <v-form v-model="vaild">
+    <v-form v-model="valid">
       <h5>Settingsページ</h5>
       <v-text-field
         label="アプリ名"
@@ -74,7 +74,11 @@ export default {
 
       appNameRule: (v) => v.length <= 30 || "30文字以内で入力してください",
       stringRule: (v) => v.length <= 150 || "150文字以内で入力してください",
-      categoryRules: [],
+      categoryRules: [
+        (v) => createItems(v).length !== 0 || "カテゴリは1つ以上必要です",
+        (v) =>
+          itemMaxLength(v) <= 4 || "各カテゴリは4文字以内で入力してください",
+      ],
       tagRule: (v) =>
         itemMaxLength(v) <= 4 || "各タグは四文字以内で入力してください",
     };

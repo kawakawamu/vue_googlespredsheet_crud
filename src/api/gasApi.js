@@ -1,13 +1,12 @@
 import axios from "axios";
 
+// 共通のヘッダーを設定したaxiosのインスタンス作成
 const gasApi = axios.create({
   headers: { "content-type": "application/x-www-form-urlencoded" },
 });
 
-// リクエスト先のURLを変更する
-gasApi.defaults.baseURL =
-  "https://script.google.com/macros/s/AKfycbzFEyBSTh5lLTKayq8SoCENeC7fvUCsuEyzKpVyfi-5_tdehr_4sEOoGA/exec";
-
+// response共通処理
+// errorが含まれていたらrejectする
 gasApi.interceptors.response.use(
   (res) => {
     if (res.data.error) {
@@ -42,7 +41,6 @@ const setAuthToken = (token) => {
  * @param {String} yearMonth
  * @returns {Promise}
  */
-
 const fetch = (yearMonth) => {
   return gasApi.post("", {
     method: "GET",
@@ -53,6 +51,11 @@ const fetch = (yearMonth) => {
   });
 };
 
+/**
+ * データを追加します
+ * @param {Object} item
+ * @returns {Promise}
+ */
 const add = (item) => {
   return gasApi.post("", {
     method: "POST",
@@ -63,7 +66,12 @@ const add = (item) => {
   });
 };
 
-//削除
+/**
+ * 指定年月&idのデータを削除します
+ * @param {String} yearMonth
+ * @param {String} id
+ * @returns {Promise}
+ */
 const $delete = (yearMonth, id) => {
   return gasApi.post("", {
     method: "DELETE",
@@ -75,7 +83,12 @@ const $delete = (yearMonth, id) => {
   });
 };
 
-//更新
+/**
+ * データを更新します
+ * @param {String} beforeYM
+ * @param {Object} item
+ * @returns {Promise}
+ */
 const update = (beforeYM, item) => {
   return gasApi.post("", {
     method: "PUT",

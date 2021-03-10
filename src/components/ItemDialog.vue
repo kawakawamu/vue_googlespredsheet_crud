@@ -218,6 +218,7 @@ export default {
       } else {
         //更新
         item.id = this.id;
+        //gasの更新処理が完了したら更新する
         await this.updateAbData({ beforeYM: this.beforeYM, item });
       }
 
