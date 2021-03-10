@@ -68,7 +68,8 @@
           <!-- タグ -->
           <v-select
             label="タグ"
-            :items="tags"
+            v-model="tags"
+            :items="tagItems"
             multiple
             chips
             :rules="[tagRule]"
@@ -255,7 +256,7 @@ export default {
         this.amount = item.outgo || 0;
       }
 
-      // this.category = item.category || this.categoryItems[0];
+      this.category = item.category || this.categoryItems[0];
       this.tags = item.tags ? item.tags.split(",") : [];
       this.memo = item.memo || "";
 
