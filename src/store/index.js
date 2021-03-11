@@ -17,13 +17,13 @@ const state = {
   errorMessage: "",
 
   settings: {
-    appName: "家計簿！",
+    appName: "Gas CRUD Checking",
     apiUrl:
       "https://script.google.com/macros/s/AKfycbzFEyBSTh5lLTKayq8SoCENeC7fvUCsuEyzKpVyfi-5_tdehr_4sEOoGA/exec",
     authToken: "88638c0c-7519-11eb-9439-0242ac130002",
-    strIncomeItems: "",
-    strOutgoItems: "",
-    strTagItems: "",
+    strIncomeItems: "給料,バイト代,売上,おこづかい,その他",
+    strOutgoItems: "食事代,趣味代,光熱費,その他",
+    strTagItems: "ゲーム,コーヒー,収入,電気代,その他",
   },
 };
 
