@@ -38,7 +38,7 @@ export default {
       //data
       "deleteAbData",
     ]),
-    open(item) {
+    openClisedialog(item) {
       this.show = true;
       this.item = item;
     },
@@ -48,7 +48,7 @@ export default {
     },
     async onClickDelete() {
       await this.deleteAbData({ item: this.item });
-      this.shiw = false;
+      this.show = false;
     },
   },
 };

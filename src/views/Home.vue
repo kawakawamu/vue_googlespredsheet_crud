@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card>
+    <v-card class="card__conteiner">
       <v-card-title>
         <v-col cols="8" sm="3">
           <v-menu
@@ -207,7 +207,8 @@ export default {
 
       // 収支の合計とカテゴリ別の支出を計算
       for (const data of this.tableData) {
-        if (data.income === 0) {
+        console.trace(this.tableData);
+        if (data.income !== null) {
           income += data.income;
         } else {
           outgo += data.outgo;
@@ -266,7 +267,7 @@ export default {
       this.$refs.itemDialog.open("edit", item);
     },
     onClickDelete(item) {
-      this.$refs.DeleteDialog.open(item);
+      this.$refs.deleteDialog.openClisedialog(item);
     },
     onSelectMonth() {
       this.$refs.menu.save(this.yearMonth);
@@ -279,4 +280,8 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.card__conteiner {
+  padding-bottom: 40px !important;
+}
+</style>
