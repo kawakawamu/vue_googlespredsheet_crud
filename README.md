@@ -1,24 +1,5 @@
-# vue-gasbook
+## curl について
 
-## Project setup
-```
-yarn install
-```
+GAS にパラメータ投げて帰ってくるか確認用
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+`curl -L -d "{\"method\":\"GET\",\"authToken\":\"88638c0c-7519-11eb-9439-0242ac130002\",\"params\":{\"yearMonth\":\"2021-03\"}}" https://script.google.com/macros/s/スプレッドシートURL/exec`
