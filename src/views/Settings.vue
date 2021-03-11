@@ -7,6 +7,7 @@
         v-model="settings.appName"
         :counter="30"
         :rules="[appNameRule]"
+        readonly
       />
       <h3>カテゴリ／タグ設定</h3>
       <p>カンマ（ &#44; ）区切りで入力してください。</p>
@@ -16,6 +17,7 @@
         v-model="settings.strIncomeItems"
         :counter="150"
         :rules="[stringRule, ...categoryRules]"
+        readonly
       />
       <!-- 支出カテゴリ -->
       <v-text-field
@@ -23,6 +25,7 @@
         v-model="settings.strOutgoItems"
         :counter="150"
         :rules="[stringRule, ...categoryRules]"
+        readonly
       />
       <!-- タグ -->
       <v-text-field
@@ -30,6 +33,7 @@
         v-model="settings.strTagItems"
         :counter="150"
         :rules="[stringRule, tagRule]"
+        readonly
       />
       <!-- API URL -->
       <v-text-field
@@ -37,6 +41,7 @@
         v-model="settings.apiUrl"
         :counter="150"
         :rules="[stringRule]"
+        readonly
       />
       <!-- Auth Token -->
       <v-text-field
@@ -44,10 +49,11 @@
         v-model="settings.authToken"
         :counter="150"
         :rules="[stringRule]"
+        readonly
       />
       <v-row class="mt-4">
         <v-spacer />
-        <v-btn color="primary" :disabled="!valid" @click="onClickSave"
+        <v-btn color="primary" :disabled="valid" @click="onClickSave"
           >保存</v-btn
         >
       </v-row>

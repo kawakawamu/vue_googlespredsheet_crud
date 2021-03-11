@@ -44,9 +44,10 @@
           <!-- タイトル -->
           <v-text-field
             label="タイトル"
-            v-model.trim="title"
             :counter="20"
+            v-model.trim="titleMaking"
             :rules="titleRules"
+            readonly
           />
           <!-- 収支 -->
           <v-radio-group
@@ -85,9 +86,10 @@
           <!-- メモ -->
           <v-text-field
             label="メモ"
-            v-model="memo"
+            v-model="memoMaking"
             :counter="50"
             :rules="[memoRule]"
+            readonly
           />
         </v-form>
       </v-card-text>
@@ -118,6 +120,7 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
+import moment from "moment";
 
 export default {
   name: "ItemDialog",
@@ -148,6 +151,10 @@ export default {
       amount: 0,
       /** メモ */
       memo: "",
+      /** タイトル観覧用 */
+      titleEx: "",
+      /** メモ観覧用 */
+      memoEx: "",
 
       /** 選択カテゴリ一覧 */
       categoryItems: [],
@@ -182,6 +189,15 @@ export default {
     actionText() {
       return this.actionType === "add" ? "追加" : "更新";
     },
+    titleMaking() {
+      const date = new Date();
+      return this.titleEx === ""
+        ? moment(date).format("HH:mm") + "に追加"
+        : "仮データ";
+    },
+    memoMaking() {
+      return this.memoEx === "" ? this.category + "を追加します！" : "仮データ";
+    },
   },
 
   methods: {
@@ -204,13 +220,14 @@ export default {
     async onClickAction() {
       const item = {
         date: this.date,
-        title: this.title,
+        title: this.titleMaking,
         category: this.category,
         tags: this.tags.join(","),
-        memo: this.memo,
+        memo: this.memoMaking,
         income: null,
         outgo: null,
       };
+
       item[this.inout] = this.amount || 0;
 
       if (this.actionType === "add") {

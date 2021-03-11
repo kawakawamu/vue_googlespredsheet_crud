@@ -207,7 +207,6 @@ export default {
 
       // 収支の合計とカテゴリ別の支出を計算
       for (const data of this.tableData) {
-        console.trace(this.tableData);
         if (data.income !== null) {
           income += data.income;
         } else {

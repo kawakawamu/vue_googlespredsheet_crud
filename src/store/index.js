@@ -138,7 +138,6 @@ const actions = {
     const id = item.id;
     commit("setLoading", { type, v: true });
     try {
-      console.log(id);
       await gasApi.delete(yearMonth, id);
       commit("deleteAbData", { yearMonth, id });
     } catch (e) {

@@ -10,7 +10,7 @@
         <v-icon>mdi-file-table-outline</v-icon>
       </v-btn>
       <!-- 歯車アイコンのボタン -->
-      <v-btn icon to="/settings">
+      <v-btn icon to="/settings" v-show="producrion">
         <v-icon>mdi-cog</v-icon>
       </v-btn>
     </v-app-bar>
@@ -35,6 +35,7 @@ export default {
   data() {
     return {
       snackbar: false,
+      producrion: false,
     };
   },
 
